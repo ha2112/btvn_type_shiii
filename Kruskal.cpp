@@ -9,11 +9,11 @@ struct Edge {
 };
 
 vector<int> parent;
-vector<int> rank;
+vector<int> ranka;
 
 void makeSet(int x) {
     parent[x] = x;
-    rank[x] = 0;
+    ranka[x] = 0;
 }
 
 int findSet(int x) {
@@ -23,19 +23,19 @@ int findSet(int x) {
 }
 
 void link(int x, int y) {
-    if (rank[x] > rank[y])
+    if (ranka[x] > ranka[y])
         parent[y] = x;
     else {
         parent[x] = y;
-        if (rank[x] == rank[y])
-            rank[y]++;
+        if (ranka[x] == ranka[y])
+            ranka[y]++;
     }
 }
 
 vector<Edge> Kruskal(int V, vector<Edge>& edges) {
     vector<Edge> result;
     parent.resize(V);
-    rank.resize(V);
+    ranka.resize(V);
 
     for (int x = 0; x < V; x++)
         makeSet(x);
