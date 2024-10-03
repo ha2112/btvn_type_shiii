@@ -6,7 +6,7 @@
 using namespace std;
 
 int largestRectangleArea(vector<int>& heights) {
-    stack<pair<int, int> >t s;
+    stack<pair<int, int> >s;
     int maxArea = 0;
     heights.push_back(0);
     
@@ -19,7 +19,7 @@ int largestRectangleArea(vector<int>& heights) {
             maxArea = max(maxArea, height * (i - index));
             start = index;
         }
-        s.push({start, heights[i]});
+        s.push(make_pair(start, heights[i]));
     }
     
     return maxArea;
