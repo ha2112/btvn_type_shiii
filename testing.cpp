@@ -1,85 +1,44 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <sstream>
-#include <iomanip>
+#include<iostream>
+#include<unordered_map>
 
 using namespace std;
 
-struct Call {
-    string from_number;
-    string to_number;
-    string date;
-    string from_time;
-    string end_time;
-};
-
-bool is_valid_phone_number(const string& number) {
-    if (number.length() != 10) return false;
-    for (char c : number) {
-        if (c < '0' || c > '9') return false;
+bool check(string a, string b){
+    unordered_map<char, int> mp;
+    int len = b.size();
+    for (int i = 0; i < len; i++){
+        mp[a[i]] += 1;
+        // cout << a[i] << " " << mp[a[i]] << endl;
+    }
+    for (int i = 0; i < len; i++){
+        mp[b[i]] -= 1;
+        if(mp[b[i]] < 0) return false;
     }
     return true;
 }
 
-int time_to_seconds(const string& time) {
-    int h, m, s;
-    sscanf(time.c_str(), "%d:%d:%d", &h, &m, &s);
-    return h * 3600 + m * 60 + s;
-}
-
-int calculate_duration(const string& start, const string& end) {
-    return time_to_seconds(end) - time_to_seconds(start);
-}
-
-int main() {
-    vector<Call> calls;
-    unordered_map<string, int> call_count;
-    unordered_map<string, int> call_duration;
-    string line;
-
-    // Read call data
-    while (getline(cin, line) && line != "#") {
-        istringstream iss(line);
-        string prefix;
-        Call call;
-        iss >> prefix >> call.from_number >> call.to_number >> call.date >> call.from_time >> call.end_time;
-        calls.push_back(call);
-        call_count[call.from_number]++;
-        call_duration[call.from_number] += calculate_duration(call.from_time, call.end_time);
+bool checkInclusion(string s1, string s2) {
+    unordered_map<char, int> mp;
+    int len = s1.size();
+    for (char x : s1){
+        mp[x] += 1;
     }
-
-    // Process queries
-    while (getline(cin, line) && line != "#") {
-        istringstream iss(line);
-        string query_type;
-        iss >> query_type;
-
-        if (query_type == "?check_phone_number") {
-            bool all_valid = true;
-            for (const Call& call : calls) {
-                if (!is_valid_phone_number(call.from_number) || !is_valid_phone_number(call.to_number)) {
-                    all_valid = false;
-                    break;
-                }
-            }
-            cout << endl << (all_valid ? "1" : "0") << endl;
-        }
-        else if (query_type == "?number_calls_from") {
-            string phone_number;
-            iss >> phone_number;
-            cout << endl << call_count[phone_number] << endl;
-        }
-        else if (query_type == "?number_total_calls") {
-            cout << endl << calls.size() << endl;
-        }
-        else if (query_type == "?count_time_calls_from") {
-            string phone_number;
-            iss >> phone_number;
-            cout << endl << call_duration[phone_number] << endl;
+    for (int i = 0; i < s2.size(); i++){
+        if(mp[s2[i]] != 0){
+            if (check(&s2[i], s1)) return true;
         }
     }
+    return false;
+}
 
+int main(){
+    unordered_map<char, int> mp;
+    string s1 = "dinitrophenylhydrazine";
+    string s2 = "acetylphenylhydrazine";
+    // cout << checkInclusion(s1, s2);
+    cout << s1.size() <<endl;
+    for (int i = 0; i < s1.size(); i++){
+        cout << s1[i] << " ";
+    }
     return 0;
-}
+}   //stupid me
