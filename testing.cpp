@@ -1,11 +1,21 @@
 #include<iostream>
-#include<unordered_map>
+#include<vector>
 
 using namespace std;
 
 int main(){
-    if(1){
-        cout << "1 is true";
+    vector<int> v;
+    int a[] = {03212,32214,214213, 421412};
+    int b[] = {100, 2193, 2131, 94032};
+    for (auto x : a){
+        v.push_back(x);
+    }
+    for (auto x : b){
+        v.push_back(x);
+    }
+    sort(v.begin() , v.end());
+    for (auto x : v){
+        cout << x << " ";
     }
     return 0;
-}   //stupid me
+}
