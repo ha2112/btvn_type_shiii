@@ -1,17 +1,37 @@
-#include"bits/stdc++.h"
+#include<bits/stdc++.h>
 
 using namespace std;
 
 
-signed main(){
-    string s = "111111111111111111111111111111111111";
-    int l = 0, r = s.size() - 1;
-    while(l < r){
-        if(l + 1 == r) break;
-        int mid = (l + r) / 2;
-        if(s[mid] == '0') l = mid;
-        else r = mid;
+class Sol{
+public:
+    int static count(int a, int b, vector<int> lista, vector<int> listb){
+        int ans = 0;
+        unordered_map<int, int> count;
+        for (int i = 0; i < a; i++){
+            count[lista[i]]++;
+        }
+        for (int i = 0; i < b; i++){
+            if (count.find(listb[i]) != count.end() && count[listb[i]] > 0){
+                count[listb[i]]--;
+                ans++;
+            }
+        }
+        return ans;
     }
-    cout << r << " " << s.size() - 1;
-    
+};
+
+
+signed main(){
+    vector<int> lista, listb;
+    int arr[] = {2,1,4,3};
+    int brr[] = {1,5,4};
+    for (auto x : arr){
+        lista.push_back(x);
+    }
+    for (auto x : brr){
+        listb.push_back(x);
+    }
+    Sol solu;
+    cout << solu.count(4, 3, lista, listb);
 }
