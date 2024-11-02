@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include"bits/stdc++.h"
 
 using namespace std;
 
@@ -35,3 +35,5 @@ signed main(){
     Sol solu;
     cout << solu.count(4, 3, lista, listb);
 }
+
+//there's sth wrong with my c++
