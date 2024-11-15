@@ -1,8 +1,8 @@
 .data
-buffer1: .space 10                     # Reserve 10 bytes for first input string
-buffer2: .space 10                     # Reserve 10 bytes for second input string
-message_equal: .asciz "Strings are equal"       # Message if strings are equal
-message_not_equal: .asciz "Strings are not equal"  # Message if strings are not equal
+buffer1: .space 100                    			# Reserve 10 bytes for first input string
+buffer2: .space 100                     		# Reserve 10 bytes for second input string
+message_equal: .asciz "Strings are equal"       	# Message if strings are equal
+message_not_equal: .asciz "Strings are not equal"  	# Message if strings are not equal
 
 .text
 main:
